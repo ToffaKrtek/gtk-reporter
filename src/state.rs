@@ -29,19 +29,29 @@ pub enum Status {
     Working,
     Testing,
     Ready,
+    Open,
 }
 
 impl Status {
     pub fn to_str(&self) -> &str {
         match self {
             Self::Working => "В работе",
-            Self::Testing => "Отдал в тестирование",
+            Self::Testing => "Передал в тестирование",
             Self::Ready => "Готово",
+            Self::Open => "Открыто",
+        }
+    }
+    pub fn to_string(&self) -> String {
+        match self {
+            Self::Working => "В работе".to_string(),
+            Self::Testing => "Передал в тестирование".to_string(),
+            Self::Ready => "Готово".to_string(),
+            Self::Open => "Открыто".to_string(),
         }
     }
 
-    pub fn all() -> [Status; 3] {
-        [Status::Working, Status::Testing, Status::Ready]
+    pub fn all() -> [Status; 4] {
+        [Status::Working, Status::Testing, Status::Ready, Self::Open]
     }
 }
 
@@ -151,10 +161,7 @@ impl State {
     }
 
     pub fn get_rows_for_date(&self, date: &str) -> Vec<Row> {
-        self.rows
-            .get(date)
-            .cloned()
-            .unwrap_or_default()
+        self.rows.get(date).cloned().unwrap_or_default()
     }
 
     pub fn get_all_dates(&self) -> Vec<String> {

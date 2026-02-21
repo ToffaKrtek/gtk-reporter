@@ -147,6 +147,7 @@ impl App {
                                     Status::Working => widgets.status_combo.set_active(Some(0)),
                                     Status::Testing => widgets.status_combo.set_active(Some(1)),
                                     Status::Ready => widgets.status_combo.set_active(Some(2)),
+                                    Status::Open => widgets.status_combo.set_active(Some(3)),
                                 }
                                 widgets.date_entry.set_text(&ctx.date);
                                 widgets.delete_btn.set_visible(true);
@@ -504,7 +505,9 @@ impl App {
 
             let status_str = status_combo_clone.active_id().unwrap_or_else(|| "В работе".into());
             let status = match status_str.as_str() {
+                "Открыто" => Status::Open,
                 "Отдал в тестирование" => Status::Testing,
+                "Передал в тестирование" => Status::Testing,
                 "Готово" => Status::Ready,
                 _ => Status::Working,
             };

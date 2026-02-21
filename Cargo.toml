@@ -2,6 +2,14 @@
 name = "gtk-reporter"
 version = "0.1.0"
 edition = "2024"
+repository = "https://github.com/ToffaKrtek/gtk-reporter"
+authors = ["Krotov Anthon krotov.anthon@yandex.ru"]
+
+[package.metadata.wix]
+upgrade-guid = "05EF7F94-3E3D-47C9-ABAC-A4508DAEA7CF"
+path-guid = "A2AA6C0B-F378-4400-B1B1-BE19B0491574"
+license = false
+eula = false
 
 [dependencies]
 gtk = "0.18.1"
@@ -12,3 +20,8 @@ thiserror = "2.0.17"
 chrono = "0.4.43"
 dirs = "5.0"
 pango = "0.18"
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
