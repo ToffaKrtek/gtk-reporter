@@ -150,6 +150,12 @@ jobs:
             libcairo2-dev \
             libgdk-pixbuf2.0-dev \
             libatk1.0-dev
+      - name: Install GTK dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          vcpkg install gtk3:x64-windows
+          echo "PKG_CONFIG_PATH=C:/vcpkg/installed/x64-windows/lib/pkgconfig" >> $GITHUB_ENV
+          echo "GTK_DIR=C:/vcpkg/installed/x64-windows" >> $GITHUB_ENV
       - name: Build artifacts
         run: |
           # Actually do builds and make zips and whatnot
